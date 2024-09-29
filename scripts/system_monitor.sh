@@ -29,3 +29,4 @@ while true; do
   # Wait for the specified interval
   sleep $interval
 done
+
