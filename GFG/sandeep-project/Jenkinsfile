@@ -2,44 +2,40 @@ pipeline {
     agent nodeg10
 
     stages {
-        
-      stage('Checkout') {
-            steps {
-                // Fetching code from the repository
-                git 'https://github.com/raviece2k10/Projects.git'
-            }
-        }
-      
-        stage('Pre-req') {
-            steps {
-                // Updating system & installing dependencies
-                sh "sudo apt-get update -y"
-                sh "sudo apt-get install docker.io -y"
-                #sh "sudo systemctl enable docker; sudo systemctl start docker"
-                sh "sudo apt-get install maven"
-                sh "docker version; mvn --version"
-            }
-        }
-          
-        stage('Build') {
-            steps {
-                // Clean & Build the project
-                sh "cd Projects/GFG/sandeep-project"
-                sh 'mvn clean'
-                sh 'mvn package'
-            }
-        }
-          
-        stage('Deploy') {
-            steps {
-                // Deploy the application (Optional)
-                sh "cd Projects/GFG/sandeep-project"
-                sh 'docker build -t webappimage .'
-                sh 'docker run -dt --name webapp -p 8081:8080 webappimage'
-                sh "docker images; docker ps"
-            }
-        }
-    }
-
     
+    stage('Checkout') {
+        steps {
+            // Fetching code from the GIT repo
+            git 'https://github.com/raviece2k10/Projects.git'
+            }
+        }
+    stage('Pre-req') {
+        steps {
+            // Updating system & installing dependencies
+            sh "sudo apt-get update -y"
+            sh "sudo apt-get install docker.io -y"
+            #sh "sudo systemctl enable docker; sudo systemctl start docker"
+            sh "sudo apt-get install maven"
+            sh "docker version; mvn --version"
+            }
+        }
+    stage('Build') {
+        steps {
+            // Clean & Build the project
+            sh "cd Projects/GFG/sandeep-project"
+            sh 'mvn clean'
+            sh 'mvn package'
+            }
+        }
+    stage('Deploy') {
+        steps {
+            // Deploy the application (Optional)
+            sh "cd Projects/GFG/sandeep-project"
+            sh 'docker build -t webappimage .'
+            sh 'docker run -dt --name webapp -p 8081:8080 webappimage'
+            sh "docker images; docker ps"
+            }
+        }
+
+    }
 }
