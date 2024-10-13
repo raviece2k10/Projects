@@ -3,22 +3,22 @@ pipeline {
         label 'nodec11' 
     }
     stages {
-        stage('Checkout') {
+        stage('Code') {
             steps {
-                // Checkout code from the repository
+                // Get project code from Github repo
                 git 'https://github.com/Shyamsandeep28/Devops-project.git'
             }
         }
         stage('Build') {
             steps {
-                // Build the project
+                // Build the project using maven
                 sh 'mvn clean' // Modify this based on your build command
                 sh 'mvn package'
             }
         }
         stage('Deploy') {
             steps {
-                // Deploy the application (Optional)
+                // Deploy the application using docker container
                 sh 'docker build -t webimage .'
                 sh 'docker run -dt --name webapp -p 8081:8080 webimage'
             }
