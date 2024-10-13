@@ -8,9 +8,10 @@ pipeline {
     stages {
         stage('Code') {
             steps {
-                // Fetching project code from the GIT repo
-                git 'https://github.com/raviece2k10/Projects.git'
-                sh "ls; pwd"
+                // Get project code from Github repo
+                git url: "https://github.com/raviece2k10/Projects.git", 
+                    branch: "main"
+                    // credentialsId: 'git-credentials'   // Jenkins credentials ID that stores the GIT authentication details
             }
         }
         stage('Environment') {
@@ -24,16 +25,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // Clean & Build the project
-                sh "cd Projects/GFG/sandeep-project"
+                // Build the project using maven
+                sh "pwd"
+                sh "cd GFG/sandeep-project"
                 sh 'mvn clean'
                 sh 'mvn package'
             }
         }
         stage('Deploy') {
             steps {
-                // Deploy the application (Optional)
-                sh "cd Projects/GFG/sandeep-project"
+                // Deploy the application in a docker container
+                sh "cd GFG/sandeep-project"
                 sh 'docker build -t webappimage .'
                 sh 'docker run -dt --name webapp -p 8081:8080 webappimage'
                 sh "docker images; docker ps"

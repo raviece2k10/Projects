@@ -7,12 +7,15 @@ pipeline {
             steps {
                 // Get project code from Github repo
                 // git 'https://github.com/Shyamsandeep28/Devops-project.git'
-                git 'https://github.com/raviece2k10/Projects.git' -b 'main'
+                git url: "https://github.com/raviece2k10/Projects.git", 
+                    branch: "main"
+                    // credentialsId: 'git-credentials'   // Jenkins credentials ID that stores the GIT authentication details
             }
         }
         stage('Build') {
             steps {
                 // Build the project using maven
+                sh "cd GFG/sandeep-project"
                 sh 'mvn clean' // Modify this based on your build command
                 sh 'mvn package'
             }
