@@ -14,7 +14,6 @@ pipeline {
             // Updating system & installing dependencies
             sh "sudo apt-get update -y"
             sh "sudo apt-get install docker.io -y"
-            #sh "sudo systemctl enable docker; sudo systemctl start docker"
             sh "sudo apt-get install maven"
             sh "docker version; mvn --version"
             }
