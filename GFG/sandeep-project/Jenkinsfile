@@ -6,7 +6,6 @@ pipeline {
         stage('Code') {
             steps {
                 // Fetching project code from the GIT repo
-                sh "git --version"
                 git 'https://github.com/raviece2k10/Projects.git'
                 sh "ls; pwd"
             }
