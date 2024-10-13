@@ -8,10 +8,11 @@
   <name>devops Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <!-- Update source and target to Java 17 for Ubuntu -->
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <!-- Update source and target Java to version installed on the system (Centos/RHEL=1.8 , Ubuntu=17) -->
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
