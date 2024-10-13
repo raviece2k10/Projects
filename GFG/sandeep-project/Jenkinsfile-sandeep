@@ -7,7 +7,7 @@ pipeline {
             steps {
                 // Get project code from Github repo
                 // git 'https://github.com/Shyamsandeep28/Devops-project.git'
-                git "https://github.com/raviece2k10/Projects.git"
+                git 'https://github.com/raviece2k10/Projects.git' -b 'main'
             }
         }
         stage('Build') {
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                // Deploy the application using docker container
+                // Deploy the application in a docker container
                 sh 'docker build -t webimage .'
                 sh 'docker run -dt --name webapp -p 8081:8080 webimage'
             }
