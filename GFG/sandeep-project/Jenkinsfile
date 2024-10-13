@@ -20,7 +20,7 @@ pipeline {
                 sh '''
                     sudo apt-get update -y
                     sudo apt-get install docker.io -y
-                    sudo apt-get install maven
+                    sudo apt-get install maven -y
                     docker version; mvn -version; java -version
                     pwd
                 '''
