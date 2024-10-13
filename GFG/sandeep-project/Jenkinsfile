@@ -5,19 +5,21 @@ pipeline {
 
     stages {
     
-    stage('Checkout') {
-        steps {
-            // Fetching code from the GIT repo
-            git 'https://github.com/raviece2k10/Projects.git'
-            }
-        }
+
     stage('Pre-req') {
         steps {
             // Updating system & installing dependencies
             sh "sudo apt-get update -y"
+            sh "apt-get install git -y"
             sh "sudo apt-get install docker.io -y"
             sh "sudo apt-get install maven"
-            sh "docker version; mvn --version"
+            sh "docker version; mvn --version; git --version"
+            }
+        }
+    stage('Code') {
+        steps {
+            // Fetching code from the GIT repo
+            git 'https://github.com/raviece2k10/Projects.git'
             }
         }
     stage('Build') {
