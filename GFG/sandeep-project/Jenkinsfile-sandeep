@@ -6,6 +6,7 @@ pipeline {
         stage('Code') {
             steps {
                 // Get project code from Github repo
+                rm -rf *   // cleaning old files
                 git 'https://github.com/Shyamsandeep28/Devops-project.git'
             }
         }
