@@ -1,6 +1,6 @@
 pipeline {
     agent { 
-        label 'nodeg10' 
+        label 'nodec11' 
     }
     stages {
         stage('Checkout') {
