@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Deploy the application in a docker container
-                dir('cd GFG/sandeep-project') {
+                dir('GFG/sandeep-project') {
                     sh 'docker build -t webimage .'
                     sh 'docker run -dt --name webapp -p 8081:8080 webimage'
                 }
