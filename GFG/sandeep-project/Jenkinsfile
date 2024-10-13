@@ -1,5 +1,7 @@
 pipeline {
-    agent { nodeg10 }
+    agent { 
+        label 'nodeg10' 
+        }
 
     stages {
     
