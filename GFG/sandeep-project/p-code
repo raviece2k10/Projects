@@ -1,6 +1,7 @@
 pipeline {
-    agent any
-
+    agent { 
+        label 'nodeg10' 
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -8,7 +9,6 @@ pipeline {
                 git 'https://github.com/Shyamsandeep28/Devops-project.git'
             }
         }
-
         stage('Build') {
             steps {
                 // Build the project
@@ -16,16 +16,12 @@ pipeline {
                 sh 'mvn package'
             }
         }
-
-       
         stage('Deploy') {
             steps {
                 // Deploy the application (Optional)
-                sh 'docker build -t myfile .'
-                sh 'docker run -dt --name appcontainer -p 8081:8080 myfile'
+                sh 'docker build -t webimage .'
+                sh 'docker run -dt --name webapp -p 8081:8080 webimage'
             }
         }
-    }
-
-    
+    }   
 }
