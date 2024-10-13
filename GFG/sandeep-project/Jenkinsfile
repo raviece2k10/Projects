@@ -1,5 +1,5 @@
 pipeline {
-    agent nodeg10
+    agent { nodeg10 }
 
     stages {
     
