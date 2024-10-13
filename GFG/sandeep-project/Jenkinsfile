@@ -4,13 +4,11 @@ pipeline {
         }
 
     stages {
-    
-
     stage('Pre-req') {
         steps {
             // Updating system & installing dependencies
             sh "sudo apt-get update -y"
-            sh "apt-get install git -y"
+            sh "sudo apt-get install git -y"
             sh "sudo apt-get install docker.io -y"
             sh "sudo apt-get install maven"
             sh "docker version; mvn --version; git --version"
@@ -39,6 +37,5 @@ pipeline {
             sh "docker images; docker ps"
             }
         }
-
     }
 }
