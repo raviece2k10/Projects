@@ -1,0 +1,28 @@
+pipeline {
+    agent { 
+        label 'nodec11' 
+    }
+    stages {
+        stage('Code') {
+            steps {
+                // Get project code from Github repo
+                rm -rf *   // cleaning old files
+                git 'https://github.com/Shyamsandeep28/Devops-project.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                // Build the project using maven
+                sh 'mvn clean' // Modify this based on your build command
+                sh 'mvn package'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Deploy the application using docker container
+                sh 'docker build -t webimage .'
+                sh 'docker run -dt --name webapp -p 8081:8080 webimage'
+            }
+        }
+    }   
+}
