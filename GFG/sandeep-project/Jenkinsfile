@@ -17,28 +17,32 @@ pipeline {
         stage('Environment') {
             steps {
                 // Updating system & installing dependencies
-                sh "sudo apt-get update -y"
-                sh "sudo apt-get install docker.io -y"
-                sh "sudo apt-get install maven"
-                sh "docker version; mvn --version"
+                sh '''
+                    sudo apt-get update -y
+                    sudo apt-get install docker.io -y
+                    sudo apt-get install maven
+                    docker version; mvn -version; java -version
+                    pwd
+                '''
             }
         }
         stage('Build') {
             steps {
                 // Build the project using maven
-                sh "pwd"
-                sh "cd GFG/sandeep-project"
-                sh 'mvn clean'
-                sh 'mvn package'
+                dir('cd GFG/sandeep-project') {
+                    sh 'mvn clean'
+                    sh 'mvn package'
+                }
             }
         }
         stage('Deploy') {
             steps {
                 // Deploy the application in a docker container
-                sh "cd GFG/sandeep-project"
-                sh 'docker build -t webappimage .'
-                sh 'docker run -dt --name webapp -p 8081:8080 webappimage'
-                sh "docker images; docker ps"
+                dir('cd GFG/sandeep-project') {
+                    sh 'docker build -t webappimage .'
+                    sh 'docker run -dt --name webapp -p 8081:8080 webappimage'
+                    sh "docker images; docker ps"
+                }
             }
         }
     }

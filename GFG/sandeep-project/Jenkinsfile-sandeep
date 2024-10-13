@@ -15,16 +15,20 @@ pipeline {
         stage('Build') {
             steps {
                 // Build the project using maven
-                sh "cd GFG/sandeep-project"
-                sh 'mvn clean' // Modify this based on your build command
-                sh 'mvn package'
+                sh '''
+                    cd GFG/sandeep-project
+                    mvn clean
+                    mvn package
+                '''
             }
         }
         stage('Deploy') {
             steps {
                 // Deploy the application in a docker container
-                sh 'docker build -t webimage .'
-                sh 'docker run -dt --name webapp -p 8081:8080 webimage'
+                dir('cd GFG/sandeep-project') {
+                    sh 'docker build -t webimage .'
+                    sh 'docker run -dt --name webapp -p 8081:8080 webimage'
+                }
             }
         }
     }   
